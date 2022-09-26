@@ -6,13 +6,14 @@
    --color-body: #555;
 }
 
+/* Typography */
 html {
    font-size: 62.5%;
 }
 
 body {
    box-sizing: border-box;
-   font-family: Inter, Arial, Helvetica, sans-serif;
+   font-family: Andika, Arial, Helvetica, sans-serif;
    font-size: 2.4rem;
    line-height: 1.5;
    color: var(--color-body);
@@ -58,8 +59,38 @@ p {
    }
 }
 
+/* Links */
+a {
+   text-decoration: none;
+}
+
+.link-arrow {
+   color: var(--color-accent);
+   text-transform: uppercase;
+   font-size: 2rem;
+   font-weight: bold;
+}
+
+.link-arrow::after {
+   content: "-->";
+   margin-left: 5px;
+   transition: margin-left 0.15s;
+}
+
+.link-arrow:hover::after {
+   margin-left: 10px;
+}
+
+@media screen and (min-width: 1024px) {
+   .link-arrow {
+      font-size: 1.5rem;
+   }
+}
+
+/* ///////////////////////////////// */
+
 .header {
-   height: 80vh;
+   height: 50vh;
    width: 100%;
    background: lightpink;
    padding: 2rem;
@@ -71,10 +102,6 @@ p {
    /* padding-left: 0; */
    display: flex;
    justify-content: space-around;
-}
-
-a {
-   text-decoration: none;
 }
 
 .footer {
