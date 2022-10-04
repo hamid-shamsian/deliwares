@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Outlet } from "react-router-dom";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "../Blocks/Header";
+import Footer from "../Blocks/Footer";
 
 const Layout = () => {
    return (

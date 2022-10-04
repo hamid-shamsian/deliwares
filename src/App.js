@@ -5,6 +5,7 @@ import Shop from "./Components/Pages/Shop";
 import Blog from "./Components/Pages/Blog";
 import Contact from "./Components/Pages/Contact";
 import About from "./Components/Pages/About";
+import NotFound from "./Components/Pages/NotFound";
 import "./App.css";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
                <Route path='blog' element={<Blog />} />
                <Route path='contact' element={<Contact />} />
                <Route path='about' element={<About />} />
+               <Route path='*' element={<NotFound />} />
             </Route>
          </Routes>
       </BrowserRouter>
