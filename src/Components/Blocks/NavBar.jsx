@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import WindowContext from "../../context/windowContext";
 
 const NavBar = ({ logo, items }) => {
-   return window.innerWidth < 768 ? (
+   const width = useContext(WindowContext);
+
+   return width < 768 ? (
       <nav className='nav collapsible collapsible--overlay'>
          <Link to='/'>
             <img src={logo} alt='Logo' />

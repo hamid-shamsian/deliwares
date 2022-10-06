@@ -1,7 +1,11 @@
 import PropTypes from "prop-types";
+import { useContext } from "react";
+import WindowContext from "../../context/windowContext";
 
 const ResponsiveMenu = ({ title, children, bPoint, className }) => {
-   return window.innerWidth < bPoint ? (
+   const width = useContext(WindowContext);
+
+   return width < bPoint ? (
       <section className={"collapsible " + className}>
          <header
             className='collapsible__header'
