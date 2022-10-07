@@ -5,40 +5,57 @@ import WindowContext from "../../context/windowContext";
 const NavBar = ({ logo, items }) => {
    const width = useContext(WindowContext);
 
-   return width < 768 ? (
-      <nav className='nav collapsible collapsible--overlay'>
-         <Link to='/'>
+   return width < 900 ? (
+      <nav className='nav'>
+         <Link to='/' className='nav__logo' onClick={closeNav}>
             <img src={logo} alt='Logo' />
          </Link>
-         <svg className='icon icon--white nav__toggler' onClick={toggler}>
+         <svg className='icon icon--white nav__toggler' onClick={toggleNav}>
             <use xlinkHref='./images/sprite.svg#menu'></use>
          </svg>
-         <ul className='list nav__list collapsible__content'>
-            {items.map(item => (
-               <li key={item._id} className='nav__item' onClick={toggler}>
-                  <Link to={item._id}>{item.content}</Link>
-               </li>
-            ))}
-         </ul>
+         <div className='nav__burger'>
+            <div className='nav__sign-in'>
+               <span>Sign in</span>
+            </div>
+            <ul className='list nav__list'>
+               {items.map(item => (
+                  <li key={item._id} className='nav__item'>
+                     <Link to={item._id} onClick={closeNav}>
+                        {item.content}
+                     </Link>
+                  </li>
+               ))}
+            </ul>
+            <div className='nav__connect'>
+               <span>Connect with us</span>
+            </div>
+         </div>
       </nav>
    ) : (
-      <nav className='nav'>
+      <nav className='nav nav--inline'>
          <Link to='/'>
             <img src={logo} alt='Logo' />
          </Link>
-         <ul className='list nav__list'>
-            {" "}
-            {items.map(item => (
-               <li key={item._id} className='nav__item'>
-                  <Link to={item._id}>{item.content}</Link>
-               </li>
-            ))}
-         </ul>
+         <div className='nav__content'>
+            <div className='nav__sign-in'>
+               <span>Sign in</span>
+            </div>
+            <ul className='list nav__list'>
+               {items.map(item => (
+                  <li key={item._id} className='nav__item'>
+                     <Link to={item._id}>{item.content}</Link>
+                  </li>
+               ))}
+            </ul>
+            {/* <div className='nav__connect'>
+               <span>Connect with us</span>
+            </div> */}
+         </div>
       </nav>
    );
 };
 
-const toggler = e =>
-   e.target.closest(".collapsible").classList.toggle("collapsible--expanded");
+const closeNav = e => e.target.closest(".nav").classList.remove("nav--open");
+const toggleNav = e => e.target.closest(".nav").classList.toggle("nav--open");
 
 export default NavBar;

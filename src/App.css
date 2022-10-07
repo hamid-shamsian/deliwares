@@ -432,23 +432,38 @@ a {
 }
 
 /* NavBar ///////////////////////////////////////*/
+.header {
+   --navbar-height: 70px;
+   height: var(--navbar-height);
+}
+
 .nav {
-   background: #000;
+   background: #333;
+   /* color: #484848; */
+   box-shadow: 0 2px 10px #000;
+   width: 100%;
    display: flex;
    justify-content: space-between;
    align-items: center;
-   flex-wrap: wrap;
    padding: 0 2rem;
+   height: var(--navbar-height);
+   position: fixed;
+   top: 0;
+   z-index: 99;
+}
+
+.nav__logo {
+   z-index: 1;
 }
 
 .nav__list {
-   width: 100%;
+   display: flex;
+   flex-direction: column;
 }
 
 .nav__item {
-   padding: 0.5rem 2rem;
+   padding: 1rem;
    border-bottom: 1px solid #555;
-   color: #d2d0db;
 }
 
 .nav__item > * {
@@ -464,23 +479,63 @@ a {
    opacity: 0.5;
    transition: all 0.2s;
    cursor: pointer;
+   z-index: 1;
 }
 
-.nav.collapsible--expanded .nav__toggler {
+.nav__sign-in {
+   color: #fff;
+   padding: 2rem;
+}
+
+.nav__connect {
+   position: absolute;
+   bottom: var(--navbar-height);
+   color: #fff;
+   padding: 4rem;
+}
+
+.nav__burger {
+   margin-top: var(--navbar-height);
+   background: #000;
+   width: 100vw;
+   height: 100vh;
+   padding: 2rem;
+   display: flex;
+   flex-direction: column;
+   position: fixed;
+   right: -100vw;
+   top: 0;
+   transition: all 0.3s;
+}
+
+.nav--open .nav__burger {
+   right: 0;
+}
+
+.nav--open .nav__toggler {
    opacity: 1;
    box-shadow: 0 0 5px 1px #666;
    border-radius: 5px;
 }
 
-@media screen and (min-width: 768px) {
-   .nav__list {
-      width: auto;
-      display: flex;
-   }
-   .nav__item {
-      border: 0;
-      padding: 0 2rem;
-   }
+/* inline */
+.nav__content {
+   display: flex;
+}
+
+.nav--inline .nav__list {
+   flex-direction: row;
+   align-items: center;
+}
+
+.nav--inline .nav__item {
+   padding: 0 2rem;
+   border: 0;
+}
+
+.nav--inline .nav__sign-in {
+   margin-left: 3rem;
+   order: 1;
 }
 
 /* Footer ///////////////////////////////////////*/
@@ -516,7 +571,6 @@ a {
 
 .footer .grid {
    justify-content: center;
-   justify-items: center;
 }
 
 /* media */
