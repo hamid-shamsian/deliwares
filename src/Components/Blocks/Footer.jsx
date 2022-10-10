@@ -1,4 +1,5 @@
 import ResponsiveMenu from "./ResponsiveMenu";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
    return (
@@ -33,7 +34,9 @@ const Footer = () => {
                </ResponsiveMenu>
             </div>
             <div className='footer__brand'>
-               <img src='./images/logo.svg' alt='' />
+               <Link className='footer__logo' to='/'>
+                  <img src='./images/logo.jpg' alt='Logo' />
+               </Link>
                <span className='footer__copyright'>
                   © 2022 DeliWares.
                   <br />

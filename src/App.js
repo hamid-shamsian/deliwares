@@ -22,7 +22,7 @@ function App() {
       <WindowContext.Provider value={windowWidth}>
          <BrowserRouter>
             <Routes>
-               <Route path='/' element={<Layout width={windowWidth} />}>
+               <Route path='/' element={<Layout />}>
                   <Route index element={<LandingPage />} />
                   <Route path='shop' element={<Shop />} />
                   <Route path='blog' element={<Blog />} />

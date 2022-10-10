@@ -15,21 +15,21 @@ const ResponsiveMenu = ({ title, children, bPoint, className }) => {
                   .classList.toggle("collapsible--expanded")
             }
          >
-            <h4 className='collapsible__heading'>{title}</h4>
+            <h4 className='collapsible__heading menu__heading'>{title}</h4>
             <img
                className='icon icon--white collapsible__chevron'
                src='/images/chevron.svg'
                alt=''
             />
          </header>
-         <div className='collapsible__content'>{children}</div>
+         <div className='collapsible__content menu__content'>{children}</div>
       </section>
    ) : (
       <section className={className}>
          <header>
             <h4 className='menu__heading'>{title}</h4>
          </header>
-         <div>{children}</div>
+         <div className='menu__content'>{children}</div>
       </section>
    );
 };
@@ -39,7 +39,8 @@ ResponsiveMenu.defaultProps = {
 };
 
 ResponsiveMenu.propTypes = {
-   bPoint: PropTypes.number.isRequired
+   bPoint: PropTypes.number.isRequired,
+   className: PropTypes.string // parent-component class
 };
 
 export default ResponsiveMenu;

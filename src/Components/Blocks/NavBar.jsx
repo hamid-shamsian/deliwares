@@ -5,9 +5,9 @@ import WindowContext from "../../context/windowContext";
 const NavBar = ({ logo, items }) => {
    const width = useContext(WindowContext);
 
-   return width < 900 ? (
+   return width < 768 ? (
       <nav className='nav'>
-         <Link to='/' className='nav__logo' onClick={closeNav}>
+         <Link className='nav__logo' to='/' onClick={closeNav}>
             <img src={logo} alt='Logo' />
          </Link>
          <svg className='icon icon--white nav__toggler' onClick={toggleNav}>
@@ -33,7 +33,7 @@ const NavBar = ({ logo, items }) => {
       </nav>
    ) : (
       <nav className='nav nav--inline'>
-         <Link to='/'>
+         <Link className='nav__logo' to='/'>
             <img src={logo} alt='Logo' />
          </Link>
          <div className='nav__content'>

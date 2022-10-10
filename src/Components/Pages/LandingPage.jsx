@@ -1,7 +1,9 @@
+import Hero from "../Blocks/Hero";
+
 const LandingPage = () => {
    return (
       <div className='landing-page'>
-         <h1>Landing</h1>
+         <Hero />
       </div>
    );
 };
