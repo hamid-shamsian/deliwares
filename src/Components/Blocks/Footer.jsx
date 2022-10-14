@@ -4,29 +4,32 @@ import { Link } from "react-router-dom";
 const Footer = () => {
    return (
       <footer className='block footer'>
-         <div className='container grid grid--cols-2'>
+         <div className='grid grid--cols-2'>
             <div className='footer__nav'>
-               <ResponsiveMenu title={"aaaaaa"} className={"footer__menu"}>
+               <ResponsiveMenu title={"Shop"} className={"footer__menu"}>
                   <ul className='list'>
                      <li>item 1</li>
                      <li>item 2</li>
                      <li>item 3</li>
                   </ul>
                </ResponsiveMenu>
-               <ResponsiveMenu title={"bbbbbb"} className={"footer__menu"}>
+               <ResponsiveMenu title={"Blog"} className={"footer__menu"}>
                   <ul className='list'>
                      <li>item 1</li>
                      <li>item 2</li>
                   </ul>
                </ResponsiveMenu>
-               <ResponsiveMenu title={"cccccc"} className={"footer__menu"}>
+               <ResponsiveMenu title={"Contact"} className={"footer__menu"}>
                   <ul className='list'>
                      <li>item 1</li>
                      <li>item 2</li>
                      <li>item 3</li>
                   </ul>
                </ResponsiveMenu>
-               <ResponsiveMenu title={"dddddd"} className={"footer__menu"}>
+               <ResponsiveMenu
+                  title={"Useful Links"}
+                  className={"footer__menu"}
+               >
                   <ul className='list'>
                      <li>item 1</li>
                      <li>item 2</li>

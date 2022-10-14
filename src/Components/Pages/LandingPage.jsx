@@ -1,10 +1,12 @@
-import Hero from "../Blocks/Hero";
+import Hero from "./../Blocks/Hero";
+import Banner from "./../Blocks/Banner";
 
 const LandingPage = () => {
    return (
-      <div className='landing-page'>
+      <main className='landing-page'>
          <Hero />
-      </div>
+         <Banner />
+      </main>
    );
 };
 

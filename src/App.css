@@ -50,8 +50,9 @@ body {
    background-color: #fff;
    /* #555; ///////////////////////////////////////*/
    color: var(--color-body);
-   font-family: Andika, Arial, Helvetica, sans-serif;
+   font-family: Montserrat, Helvetica, sans-serif;
    font-size: 2.4rem;
+   font-weight: 500;
    line-height: 1.5;
    margin: 0;
 }
@@ -194,9 +195,10 @@ a {
    color: #fff;
    cursor: pointer;
    font-size: 1.5rem;
-   font-weight: 600;
+   font-weight: 700;
+   line-height: 1;
    margin: 1rem 0;
-   padding: 0.75rem 1.5rem;
+   padding: 1.5rem;
    text-align: center;
    text-transform: uppercase;
    white-space: nowrap;
@@ -407,7 +409,7 @@ a {
 /* Blocks ///////////////////////////////////////*/
 .block {
    --block-padding-vertical: 6rem;
-   padding: var(--block-padding-vertical) 2rem;
+   padding: var(--block-padding-vertical) 0;
 }
 
 .block__header {
@@ -429,7 +431,7 @@ a {
 
 .block--polygon {
    padding-bottom: calc(var(--block-padding-vertical) + 4rem);
-   clip-path: polygon(0% 0%, 100% 0%, 100% 90%, 10% 100%, 0% 90%);
+   clip-path: polygon(0% 0%, 100% 0%, 100% 60%, 50% 100%, 0% 60%);
 }
 
 /* NavBar ///////////////////////////////////////*/
@@ -546,12 +548,12 @@ a {
 
 /* Footer ///////////////////////////////////////*/
 .footer {
-   background: #232323;
+   background: #101010;
    color: #bbb;
 }
 
 .footer__nav {
-   max-width: min-content;
+   max-width: max-content;
    display: flex;
    flex-direction: column;
 }
@@ -559,7 +561,7 @@ a {
 .footer__menu {
    margin: 0 2rem;
    border-bottom: 1px solid #393939;
-   font-size: 3rem;
+   font-size: 2rem;
 }
 
 .footer__brand {
@@ -592,6 +594,11 @@ a {
 
 /* media */
 @media screen and (min-width: 768px) {
+   .footer {
+      /* background: rgba(0, 0, 0, 1) url(./css-images/footer-bg.webp); */
+      /* no-repeat   scroll center center / cover; */
+      /* mmmmmmmmmmmmmmmmmmmodify aboooooooooooooveeeeeeeeeeeeeeeeee ^^^^^^ */
+   }
    .footer__brand {
       order: -1;
    }
@@ -602,6 +609,10 @@ a {
       max-width: 100%;
       flex-direction: row;
       align-items: flex-start;
+   }
+   .footer__menu {
+      border: 0;
+      margin-right: 5rem;
    }
 }
 
@@ -732,7 +743,121 @@ a {
    }
 }
 
-/*  */
+/* Banners /////////////////////////////////////////////*/
+.banner {
+   overflow: hidden;
+}
+
+.banner__header {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   border: 2px solid #333;
+   padding: 0 6rem;
+   border-radius: var(--border-radius);
+   position: relative;
+   right: 2rem;
+   margin: 2rem 0;
+}
+
+.banner__heading {
+   font-size: 2.5rem;
+   font-weight: 300;
+   margin: 1rem 0 0;
+}
+
+.banner__heading > span {
+   font-weight: 700;
+}
+
+.banner__tagline {
+   font-size: 1.5rem;
+   font-weight: 300;
+   margin-bottom: 1.5rem;
+}
+
+.banner__tagline > span {
+   font-weight: 700;
+}
+
+.banner__img {
+   position: relative;
+   display: flex; /* tricky rule?! to rectify unwanted marginBottom-like space below img */
+}
+
+.banner__img > img {
+   width: 100%;
+}
+
+.banner__img::before {
+   background: #0003;
+   content: "";
+   position: absolute;
+   top: 20px;
+   right: 20px;
+   bottom: 20px;
+   left: 20px;
+   transform: scaleX(0);
+   /* opacity: 0; */
+   transition: 0.5s;
+}
+
+.banner__img:hover::before {
+   transform: scaleX(1);
+   /* opacity: 1; */
+}
+
+.banner__img::after {
+   background: #0003;
+   content: "";
+   position: absolute;
+   top: 20px;
+   right: 20px;
+   bottom: 20px;
+   left: 20px;
+   transform: scaleY(0);
+   /* opacity: 0; */
+   transition: 0.5s;
+}
+
+.banner__img:hover::after {
+   transform: scaleY(1);
+   /* opacity: 1; */
+}
+
+.banner:nth-of-type(even) .banner__header {
+   right: -2rem;
+   align-items: flex-end;
+   text-align: end;
+}
+
+/* media */
+@media screen and (min-width: 768px) {
+   .banner__header {
+      transition: all 0.2s ease-in-out;
+   }
+   .banner__header:hover {
+      right: 0 !important;
+      box-shadow: inset 0 0 20px #000;
+   }
+   .banner:nth-of-type(even) .banner__header {
+      order: -1;
+   }
+}
+
+@media screen and (min-width: 1024px) {
+   .banner__heading {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+   }
+   .banner__tagline {
+      font-size: 2.5rem;
+   }
+   .banner__btn {
+      font-size: 2.5rem;
+      padding: 1.5rem 3rem;
+   }
+}
 
 /* Animations Classes ///////////////////////////////////*/
 .relative-animation {
