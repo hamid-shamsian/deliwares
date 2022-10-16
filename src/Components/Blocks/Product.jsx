@@ -1,9 +1,27 @@
-import Card from "./Card";
+import { Link } from "react-router-dom";
 
-const Product = () => {
+const Product = ({ data: { _id, title, price, images } }) => {
    return (
-      <div className='product product--popular'>
-         <Card name={"Product"} description={"Green Scarf"} />
+      <div className='card product'>
+         <div className='product__body'>
+            <Link className='wraper-link' to={`/shop/products/${_id}`}>
+               <img className='product__img1' src={images.a} alt='' />
+               <img className='product__img2' src={images.b} alt='' />
+            </Link>
+            <div className='product__actions'>
+               <span className='product__action'>A</span>
+               <span className='product__action'>B</span>
+               <span className='product__action'>C</span>
+            </div>
+         </div>
+         <header className='card__header product__brief'>
+            <h3 className='card__heading product__title'>
+               <Link to={`/shop/products/${_id}`}>{title}</Link>
+            </h3>
+            <span className='badge badge--primary product__price'>
+               ${price}
+            </span>
+         </header>
       </div>
    );
 };

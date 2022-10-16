@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import WindowContext from "../../context/windowContext";
+import WindowContext from "../../Context/windowContext";
 
 const NavBar = ({ logo, items }) => {
    const width = useContext(WindowContext);

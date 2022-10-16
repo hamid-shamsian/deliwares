@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useContext } from "react";
-import WindowContext from "../../context/windowContext";
+import WindowContext from "../../Context/windowContext";
 
 const ResponsiveMenu = ({ title, children, bPoint, className }) => {
    const width = useContext(WindowContext);

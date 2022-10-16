@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import WindowContext from "./context/windowContext";
+import WindowContext from "./Context/windowContext";
 import Layout from "./Components/Layouts/Layout";
 import LandingPage from "./Components/Pages/LandingPage";
 import Shop from "./Components/Pages/Shop";

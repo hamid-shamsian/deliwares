@@ -4,7 +4,10 @@ const Banner = () => {
    return (
       <div className='container block'>
          <div className='grid grid--cols-2 banner'>
-            <Link className='banner__img' to='/shop/collection/women'>
+            <Link
+               className='wraper-link banner__img'
+               to='/shop/collection/women'
+            >
                <img src='./images/banner-1.webp' alt='' />
             </Link>
             <header className='banner__header'>
@@ -23,7 +26,7 @@ const Banner = () => {
             </header>
          </div>
          <div className='grid grid--cols-2 banner'>
-            <Link className='banner__img' to='/shop/collection/men'>
+            <Link className='wraper-link banner__img' to='/shop/collection/men'>
                <img src='./images/banner-2.webp' alt='' />
             </Link>
             <header className='banner__header'>
