@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const Product = ({ data: { _id, title, price, images } }) => {
+const Product = ({ data: { _id, title, price, images, category } }) => {
    return (
       <div className='card product'>
          <div className='product__body'>
@@ -9,9 +9,9 @@ const Product = ({ data: { _id, title, price, images } }) => {
                <img className='product__img2' src={images.b} alt='' />
             </Link>
             <div className='product__actions'>
-               <span className='product__action'>A</span>
-               <span className='product__action'>B</span>
-               <span className='product__action'>C</span>
+               <span className='product__action'>cat: {category}</span>
+               <span className='product__action'></span>
+               <span className='product__action'></span>
             </div>
          </div>
          <header className='card__header product__brief'>

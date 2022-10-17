@@ -6,7 +6,8 @@ const products = [
       images: {
          a: "./images/product-1.webp",
          b: "./images/product-2.webp"
-      }
+      },
+      category: 1
    },
    {
       _id: 2,
@@ -15,7 +16,8 @@ const products = [
       images: {
          a: "./images/product-1.webp",
          b: "./images/product-2.webp"
-      }
+      },
+      category: 2
    },
    {
       _id: 3,
@@ -24,7 +26,8 @@ const products = [
       images: {
          a: "./images/product-1.webp",
          b: "./images/product-2.webp"
-      }
+      },
+      category: 3
    },
    {
       _id: 4,
@@ -33,7 +36,8 @@ const products = [
       images: {
          a: "./images/product-1.webp",
          b: "./images/product-2.webp"
-      }
+      },
+      category: 4
    },
    {
       _id: 5,
@@ -42,7 +46,8 @@ const products = [
       images: {
          a: "./images/product-1.webp",
          b: "./images/product-2.webp"
-      }
+      },
+      category: 2
    },
    {
       _id: 6,
@@ -51,7 +56,8 @@ const products = [
       images: {
          a: "./images/product-1.webp",
          b: "./images/product-2.webp"
-      }
+      },
+      category: 3
    },
    {
       _id: 7,
@@ -60,7 +66,8 @@ const products = [
       images: {
          a: "./images/product-1.webp",
          b: "./images/product-2.webp"
-      }
+      },
+      category: 4
    },
    {
       _id: 8,
@@ -69,7 +76,8 @@ const products = [
       images: {
          a: "./images/product-1.webp",
          b: "./images/product-2.webp"
-      }
+      },
+      category: 1
    },
    {
       _id: 9,
@@ -78,7 +86,8 @@ const products = [
       images: {
          a: "./images/product-1.webp",
          b: "./images/product-2.webp"
-      }
+      },
+      category: 3
    },
    {
       _id: 10,
@@ -87,7 +96,8 @@ const products = [
       images: {
          a: "./images/product-1.webp",
          b: "./images/product-2.webp"
-      }
+      },
+      category: 4
    },
    {
       _id: 11,
@@ -96,7 +106,8 @@ const products = [
       images: {
          a: "./images/product-1.webp",
          b: "./images/product-2.webp"
-      }
+      },
+      category: 1
    },
    {
       _id: 12,
@@ -105,7 +116,8 @@ const products = [
       images: {
          a: "./images/product-1.webp",
          b: "./images/product-2.webp"
-      }
+      },
+      category: 2
    },
    {
       _id: 13,
@@ -114,7 +126,8 @@ const products = [
       images: {
          a: "./images/product-1.webp",
          b: "./images/product-2.webp"
-      }
+      },
+      category: 4
    },
    {
       _id: 14,
@@ -123,7 +136,8 @@ const products = [
       images: {
          a: "./images/product-1.webp",
          b: "./images/product-2.webp"
-      }
+      },
+      category: 1
    },
    {
       _id: 15,
@@ -132,7 +146,8 @@ const products = [
       images: {
          a: "./images/product-1.webp",
          b: "./images/product-2.webp"
-      }
+      },
+      category: 2
    },
    {
       _id: 16,
@@ -141,7 +156,8 @@ const products = [
       images: {
          a: "./images/product-1.webp",
          b: "./images/product-2.webp"
-      }
+      },
+      category: 3
    },
    {
       _id: 17,
@@ -150,7 +166,8 @@ const products = [
       images: {
          a: "./images/product-1.webp",
          b: "./images/product-2.webp"
-      }
+      },
+      category: 1
    },
    {
       _id: 18,
@@ -159,7 +176,8 @@ const products = [
       images: {
          a: "./images/product-1.webp",
          b: "./images/product-2.webp"
-      }
+      },
+      category: 2
    },
    {
       _id: 19,
@@ -168,7 +186,8 @@ const products = [
       images: {
          a: "./images/product-1.webp",
          b: "./images/product-2.webp"
-      }
+      },
+      category: 3
    },
    {
       _id: 20,
@@ -177,7 +196,8 @@ const products = [
       images: {
          a: "./images/product-1.webp",
          b: "./images/product-2.webp"
-      }
+      },
+      category: 4
    }
 ];
 
