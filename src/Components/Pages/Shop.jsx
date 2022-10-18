@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { orderBy } from "lodash";
 import getProducts from "../../services/productService";
 import getCategories from "../../services/categoryService";
-import Product from "../Blocks/Product";
+import ProductCard from "../Blocks/ProductCard";
 import Pagination from "../Common/Pagination";
 import ListGroup from "../Common/ListGroup";
 import SortBy from "../Common/SortBy";
@@ -71,7 +71,7 @@ const Shop = () => {
          </nav>
          <section className='flex container'>
             {currentPageProducts.map(product => (
-               <Product key={product._id} data={product} />
+               <ProductCard key={product._id} data={product} />
             ))}
          </section>
       </main>
