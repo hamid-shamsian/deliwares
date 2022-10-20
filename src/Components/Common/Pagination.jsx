@@ -6,7 +6,7 @@ const Pagination = ({ itemsCount, pageSize, currentPage, onPageChange }) => {
    if (pagesCount === 1) return null;
    const pages = range(1, pagesCount + 1);
    return (
-      <ul className='list pagination'>
+      <ul className='card list pagination'>
          <li
             className='page__item'
             onClick={() => currentPage - 1 && onPageChange(currentPage - 1)}

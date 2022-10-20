@@ -1,14 +1,14 @@
 const SortBy = ({ paths, currentSort, onSortChange }) => {
    return (
-      <div className='sort-by'>
+      <div className='card sort-by'>
          <label htmlFor='sort-by'>Sort By:</label>
          <select
             className='sort-by__path'
             id='sort-by'
             onChange={e => onSortChange({ path: e.target.value, order: "asc" })}
          >
-            {paths.map(path => (
-               <option key={path} value={path}>
+            {paths.map((path, i) => (
+               <option key={i} value={path}>
                   {path}
                </option>
             ))}
@@ -22,7 +22,15 @@ const SortBy = ({ paths, currentSort, onSortChange }) => {
                })
             }
          >
-            {currentSort.order}
+            {/* <svg className='icon icon--white'>
+               <use xlinkHref='./images/sprite.svg#sort-up'></use>
+            </svg> */}
+            <img
+               src={`./images/sort-${
+                  currentSort.order === "asc" ? "up" : "down"
+               }.svg`}
+               alt=''
+            />
          </span>
       </div>
    );

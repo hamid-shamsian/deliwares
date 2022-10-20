@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { orderBy } from "lodash";
 import getProducts from "../../services/productService";
 import getCategories from "../../services/categoryService";
@@ -8,23 +8,24 @@ import ListGroup from "../Common/ListGroup";
 import SortBy from "../Common/SortBy";
 
 const Shop = () => {
-   // All Products
-   const products = useRef(getProducts());
-   // Categories
-   const categories = useRef(getCategories());
+   // All Products & Categories
+   const [products, setProducts] = useState([]);
+   const [categories, setCategories] = useState([]);
+   useEffect(() => {
+      setProducts(getProducts());
+      setCategories(getCategories());
+   }, []);
 
    // FilteredProducts
    const [filteredProducts, setFilteredProducts] = useState([]);
 
    // SelectedCat
-   const [selectedCat, setSelectedCat] = useState(categories.current[0]);
+   const [selectedCat, setSelectedCat] = useState({});
    const handleCatSelect = category => setSelectedCat(category);
    useEffect(() => {
-      setFilteredProducts(
-         products.current.filter(p => p.category === selectedCat._id)
-      );
+      setFilteredProducts(products.filter(p => p.category === selectedCat._id));
       setCurrentSort(currentSort => ({ ...currentSort }));
-   }, [selectedCat]);
+   }, [selectedCat, products]);
 
    // CurrentSort
    const [currentSort, setCurrentSort] = useState({});
@@ -37,7 +38,7 @@ const Shop = () => {
 
    // PageSize
    // const [pageSize, setPageSize] = useState(4);
-   const pageSize = 5;
+   const pageSize = 3;
 
    // CurrentPage
    const [currentPage, setCurrentPage] = useState(1);
@@ -51,12 +52,12 @@ const Shop = () => {
       <main className='block shop'>
          <h1>Shop</h1>
          <hr />
-         <nav className='shop__nav'>
-            <ListGroup
-               items={categories.current}
-               selectedItem={selectedCat}
-               onItemSelect={handleCatSelect}
-            />
+         <ListGroup
+            items={categories}
+            selectedItem={selectedCat}
+            onItemSelect={handleCatSelect}
+         />
+         <nav className='grid grid--cols-2 grid--gap container shop__nav'>
             <SortBy
                paths={["title", "price", "_id"]}
                currentSort={currentSort}
@@ -69,7 +70,7 @@ const Shop = () => {
                onPageChange={handlePageChange}
             />
          </nav>
-         <section className='flex container'>
+         <section className='grid grid--cols-3 grid--gap container'>
             {currentPageProducts.map(product => (
                <ProductCard key={product._id} data={product} />
             ))}
