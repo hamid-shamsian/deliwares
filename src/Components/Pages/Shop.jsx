@@ -8,12 +8,18 @@ import ListGroup from "../Common/ListGroup";
 import SortBy from "../Common/SortBy";
 
 const Shop = () => {
+   // Loading
+   const [loading, setLoading] = useState(true);
+
    // All Products & Categories
    const [products, setProducts] = useState([]);
    const [categories, setCategories] = useState([]);
    useEffect(() => {
-      setProducts(getProducts());
-      setCategories(getCategories());
+      Promise.all([getProducts(), getCategories()]).then(res => {
+         setProducts(res[0].data);
+         setCategories(res[1].data);
+         setLoading(false);
+      });
    }, []);
 
    // FilteredProducts
@@ -23,7 +29,9 @@ const Shop = () => {
    const [selectedCat, setSelectedCat] = useState({});
    const handleCatSelect = category => setSelectedCat(category);
    useEffect(() => {
-      setFilteredProducts(products.filter(p => p.category === selectedCat._id));
+      setFilteredProducts(
+         products.filter(p => p.categories[0].id === selectedCat.id)
+      );
       setCurrentSort(currentSort => ({ ...currentSort }));
    }, [selectedCat, products]);
 
@@ -50,6 +58,7 @@ const Shop = () => {
 
    return (
       <main className='block shop'>
+         {loading && <div className='loading'></div>}
          <h1>Shop</h1>
          <hr />
          <ListGroup
@@ -59,7 +68,7 @@ const Shop = () => {
          />
          <nav className='grid grid--cols-2 grid--gap container shop__nav'>
             <SortBy
-               paths={["title", "price", "_id"]}
+               paths={["name", "price", "id"]}
                currentSort={currentSort}
                onSortChange={handleSortChange}
             />
@@ -71,8 +80,8 @@ const Shop = () => {
             />
          </nav>
          <section className='grid grid--cols-3 grid--gap container'>
-            {currentPageProducts.map(product => (
-               <ProductCard key={product._id} data={product} />
+            {currentPageProducts.map((product, i) => (
+               <ProductCard key={i} data={product} />
             ))}
          </section>
       </main>

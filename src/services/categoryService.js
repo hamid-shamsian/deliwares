@@ -1,10 +1,6 @@
-const categories = [
-   { _id: 1, name: "T-shirt" },
-   { _id: 2, name: "Lingerie" },
-   { _id: 3, name: "Glasses" },
-   { _id: 4, name: "Accessories" }
-];
+import http from "./httpService";
+import apiUrlFor from "../utils/WCapi";
 
 export default function getCategories() {
-   return categories;
+   return http.get(apiUrlFor("/products/categories"));
 }

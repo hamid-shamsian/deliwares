@@ -25,10 +25,12 @@ function App() {
                <Route path='/' element={<Layout />}>
                   <Route index element={<LandingPage />} />
                   <Route path='shop' element={<Shop />} />
+                  {/* <Route path='shop/*' element={<Collection />} /> */}
                   <Route path='blog' element={<Blog />} />
                   <Route path='contact' element={<Contact />} />
                   <Route path='about' element={<About />} />
-                  <Route path='*' element={<NotFound />} />
+                  <Route path='not-found' element={<NotFound />} />
+                  {/* Redirect * to not-found */}
                </Route>
             </Routes>
          </BrowserRouter>

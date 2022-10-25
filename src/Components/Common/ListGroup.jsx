@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 const ListGroup = ({ items, selectedItem, onItemSelect }) => {
    return (
       <ul className='list list-group'>
-         {items.map(item => (
+         {items.map((item, i) => (
             <li
-               key={item._id}
+               key={i}
                className={
                   item === selectedItem
                      ? "list-group__item active"
