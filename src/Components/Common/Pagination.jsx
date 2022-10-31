@@ -4,7 +4,16 @@ import { range } from "lodash";
 const Pagination = ({ itemsCount, pageSize, currentPage, onPageChange }) => {
    const pagesCount = Math.ceil(itemsCount / pageSize);
    if (pagesCount === 1) return null;
-   const pages = range(1, pagesCount + 1);
+
+   const pages =
+      pagesCount < 6
+         ? range(1, pagesCount + 1)
+         : currentPage < 4
+         ? [1, 2, 3, null, pagesCount]
+         : currentPage > pagesCount - 3
+         ? [1, null, pagesCount - 2, pagesCount - 1, pagesCount]
+         : [1, null, currentPage, null, pagesCount];
+
    return (
       <ul className='card list pagination'>
          <li
@@ -13,15 +22,15 @@ const Pagination = ({ itemsCount, pageSize, currentPage, onPageChange }) => {
          >
             &lt;
          </li>
-         {pages.map(page => (
+         {pages.map((page, i) => (
             <li
-               key={page}
+               key={i} // only i is suitable because pages.length is always below or equal to 5, but the page is unstable because of change of the page numbers.
                className={
                   page === currentPage ? "page__item active" : "page__item"
                }
-               onClick={() => onPageChange(page)}
+               onClick={() => page && onPageChange(page)}
             >
-               {page}
+               {page || "..."}
             </li>
          ))}
          <li

@@ -6,7 +6,9 @@ const ProductCard = ({ data: { id, name, price, images, categories } }) => {
          <div className='product__body'>
             <Link className='wraper-link' to={`/shop/products/${id}`}>
                <img className='product__img1' src={images[0].src} alt='' />
-               <img className='product__img2' src={images[1].src} alt='' />
+               {images[1] && (
+                  <img className='product__img2' src={images[1].src} alt='' />
+               )}
             </Link>
             <div className='product__actions'>
                <span className='product__action'>cat: {categories[0].id}</span>

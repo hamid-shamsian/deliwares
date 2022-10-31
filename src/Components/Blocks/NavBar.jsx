@@ -1,11 +1,37 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import WindowContext from "../../Context/windowContext";
+import CatContext from "./../../Context/catContext";
+import ListGroup from "./../Common/ListGroup";
+import NavMenu from "./../Common/NavMenu";
 
-const NavBar = ({ logo, items }) => {
+const NavBar = ({ logo, history }) => {
    const width = useContext(WindowContext);
+   const mobileMode = width < 768;
 
-   return width < 768 ? (
+   const navigate = useNavigate();
+
+   const { cats, selectedCat, handleCatSelect } = useContext(CatContext);
+
+   const items = [
+      {
+         content: (
+            <NavMenu path={"/shop"} title={"Shop"} mobileMode={mobileMode}>
+               <ListGroup
+                  onClick={() => navigate("/shop")}
+                  items={cats}
+                  selectedItem={selectedCat}
+                  onItemSelect={handleCatSelect}
+               />
+            </NavMenu>
+         )
+      },
+      { path: "/blog", content: "Blog" },
+      { path: "/contact", content: "Contact" },
+      { path: "/about", content: "About Us" }
+   ];
+
+   return mobileMode ? (
       <nav className='nav'>
          <Link className='nav__logo' to='/' onClick={closeNav}>
             <img src={logo} alt='Logo' />
@@ -18,11 +44,13 @@ const NavBar = ({ logo, items }) => {
                <span>Sign in</span>
             </div>
             <ul className='list nav__list'>
-               {items.map(item => (
-                  <li key={item._id} className='nav__item'>
-                     <Link to={item._id} onClick={closeNav}>
-                        {item.content}
-                     </Link>
+               {items.map((item, i) => (
+                  <li key={i} className='nav__item' onClick={closeNav}>
+                     {item.path ? (
+                        <NavLink to={item.path}>{item.content}</NavLink>
+                     ) : (
+                        item.content
+                     )}
                   </li>
                ))}
             </ul>
@@ -41,9 +69,13 @@ const NavBar = ({ logo, items }) => {
                <span>Sign in</span>
             </div>
             <ul className='list nav__list'>
-               {items.map(item => (
-                  <li key={item._id} className='nav__item'>
-                     <Link to={item._id}>{item.content}</Link>
+               {items.map((item, i) => (
+                  <li key={i} className='nav__item'>
+                     {item.path ? (
+                        <Link to={item.path}>{item.content}</Link>
+                     ) : (
+                        item.content
+                     )}
                   </li>
                ))}
             </ul>

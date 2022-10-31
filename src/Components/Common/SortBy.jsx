@@ -8,8 +8,8 @@ const SortBy = ({ paths, currentSort, onSortChange }) => {
             onChange={e => onSortChange({ path: e.target.value, order: "asc" })}
          >
             {paths.map((path, i) => (
-               <option key={i} value={path}>
-                  {path}
+               <option key={i} value={path.key}>
+                  {path.title}
                </option>
             ))}
          </select>
