@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import WindowContext from "./Context/windowContext";
 import CatContext from "./Context/catContext";
 import Layout from "./Components/Layouts/Layout";
@@ -9,6 +9,7 @@ import Blog from "./Components/Pages/Blog";
 import Contact from "./Components/Pages/Contact";
 import About from "./Components/Pages/About";
 import NotFound from "./Components/Pages/NotFound";
+// import getCategories from "../../services/categoryService";
 import "./App.css";
 
 function App() {
@@ -38,13 +39,12 @@ function App() {
                <Routes>
                   <Route path='/' element={<Layout />}>
                      <Route index element={<LandingPage />} />
-                     <Route path='shop' element={<Shop />} />
-                     {/* <Route path='shop/*' element={<Collection />} /> */}
+                     <Route path='shop/*' element={<Shop />} />
                      <Route path='blog' element={<Blog />} />
                      <Route path='contact' element={<Contact />} />
                      <Route path='about' element={<About />} />
                      <Route path='not-found' element={<NotFound />} />
-                     {/* Redirect * to not-found */}
+                     <Route path='*' element={<Navigate to='/not-found' />} />
                   </Route>
                </Routes>
             </BrowserRouter>

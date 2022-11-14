@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import WindowContext from "../../Context/windowContext";
-import CatContext from "./../../Context/catContext";
-import ListGroup from "./../Common/ListGroup";
-import NavMenu from "./../Common/NavMenu";
+import CatContext from "../../Context/catContext";
+import ListGroup from "../Common/ListGroup";
+import NavMenu from "../Common/NavMenu";
 
-const NavBar = ({ logo, history }) => {
+const NavBar = ({ logo }) => {
    const width = useContext(WindowContext);
    const mobileMode = width < 768;
 
@@ -17,12 +17,17 @@ const NavBar = ({ logo, history }) => {
       {
          content: (
             <NavMenu path={"/shop"} title={"Shop"} mobileMode={mobileMode}>
-               <ListGroup
-                  onClick={() => navigate("/shop")}
-                  items={cats}
-                  selectedItem={selectedCat}
-                  onItemSelect={handleCatSelect}
-               />
+               {closeMenu => (
+                  <ListGroup
+                     onClick={e => {
+                        navigate("/shop");
+                        closeMenu(e);
+                     }}
+                     items={cats}
+                     selectedItem={selectedCat}
+                     onItemSelect={handleCatSelect}
+                  />
+               )}
             </NavMenu>
          )
       },

@@ -1,20 +1,21 @@
-const SortBy = ({ paths, currentSort, onSortChange }) => {
+const SortBy = ({ sortPaths, currentSort, onSortChange }) => {
    return (
-      <div className='card sort-by'>
+      <div className='sort-by'>
          <label htmlFor='sort-by'>Sort By:</label>
          <select
-            className='sort-by__path'
+            className='sort-by__path shining'
             id='sort-by'
+            value={currentSort.path}
             onChange={e => onSortChange({ path: e.target.value, order: "asc" })}
          >
-            {paths.map((path, i) => (
+            {sortPaths.map((path, i) => (
                <option key={i} value={path.key}>
                   {path.title}
                </option>
             ))}
          </select>
          <span
-            className='sort-by__order'
+            className='sort-by__order shining'
             onClick={() =>
                onSortChange({
                   path: currentSort.path,

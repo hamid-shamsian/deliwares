@@ -1,20 +1,17 @@
-import { useState, useEffect, useMemo, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
+import { Routes, Route } from "react-router-dom";
 import { orderBy } from "lodash";
-import CatContext from "./../../Context/catContext";
-import ProductCard from "../Blocks/ProductCard";
-import Pagination from "../Common/Pagination";
-import ListGroup from "../Common/ListGroup";
-import SortBy from "../Common/SortBy";
+import CatContext from "../../Context/catContext";
+import Products from "../Blocks/Products";
+import ProductDetails from "../Blocks/ProductDetails";
+import NotFound from "./NotFound";
 // import getProducts from "../../services/productService";
-// import getCategories from "../../services/categoryService";
 
 const Shop = () => {
-   const { cats, selectedCat, handleCatSelect } = useContext(CatContext);
-
-   // Loading
+   // loading
    const [loading, setLoading] = useState(true);
 
-   // Products
+   // products
    const [products, setProducts] = useState([]);
    useEffect(
       () =>
@@ -24,12 +21,13 @@ const Shop = () => {
             //    setLoading(false);
             // });
             setProducts(JSON.parse(localStorage.getItem("p"))); //temp
-            setLoading(false); //temp
+            setTimeout(() => setLoading(false), 1000); //temp
          })(),
       []
    );
 
-   // SelectedCat
+   // selectedCat
+   const { selectedCat } = useContext(CatContext);
    useEffect(() => {
       setFilteredProducts(
          selectedCat.id
@@ -40,10 +38,10 @@ const Shop = () => {
       setCurrentPage(1);
    }, [selectedCat, products]);
 
-   // FilteredProducts
+   // filteredProducts
    const [filteredProducts, setFilteredProducts] = useState([]);
 
-   // CurrentSort
+   // currentSort
    const [currentSort, setCurrentSort] = useState({
       path: "date_modified",
       order: "desc"
@@ -54,58 +52,45 @@ const Shop = () => {
          orderBy(fP, [currentSort.path], [currentSort.order])
       );
    }, [currentSort]);
+   const sortPaths = [
+      { key: "date_modified", title: "Latest" },
+      { key: "name", title: "Title" },
+      { key: "price", title: "Price" }
+   ];
 
-   // PageSize
+   // pageSize
    // const [pageSize, setPageSize] = useState(4);
    const pageSize = 10;
 
-   // CurrentPage
+   // currentPage
    const [currentPage, setCurrentPage] = useState(1);
    const handlePageChange = page => setCurrentPage(page);
-   const currentPageProducts = useMemo(() => {
-      const startIndex = (currentPage - 1) * pageSize;
-      return filteredProducts.slice(startIndex, startIndex + pageSize);
-   }, [filteredProducts, currentPage, pageSize]);
 
-   const fP_count = filteredProducts.length;
-   const HelperVar = currentPage * pageSize;
+   const pInterface = {
+      filteredProducts,
+      sortPaths,
+      currentSort,
+      handleSortChange,
+      pageSize,
+      currentPage,
+      handlePageChange
+   };
 
    return (
       <main className='block shop'>
          {loading && <div className='loading'></div>}
          <h1>Shop</h1>
          <hr />
-         <ListGroup
-            items={cats}
-            selectedItem={selectedCat}
-            onItemSelect={handleCatSelect}
-         />
-         <nav className='grid grid--cols-2 grid--gap container shop__nav'>
-            <SortBy
-               paths={[
-                  { key: "date_modified", title: "Latest" },
-                  { key: "name", title: "Title" },
-                  { key: "price", title: "Price" }
-               ]}
-               currentSort={currentSort}
-               onSortChange={handleSortChange}
+
+         <Routes>
+            <Route path='/' element={<Products data={pInterface} />} />
+            <Route
+               path='/products/:productId'
+               element={<ProductDetails data={products} />}
             />
-            <Pagination
-               itemsCount={fP_count}
-               pageSize={pageSize}
-               currentPage={currentPage}
-               onPageChange={handlePageChange}
-            />
-         </nav>
-         <p>
-            Showing {HelperVar - pageSize + 1}-
-            {HelperVar > fP_count ? fP_count : HelperVar} of {fP_count} Results:
-         </p>
-         <section className='grid grid--cols-3 grid--gap container'>
-            {currentPageProducts.map((product, i) => (
-               <ProductCard key={i} data={product} />
-            ))}
-         </section>
+            {/* <Route path='collections/:col' element={<Collection />} /> */}
+            <Route path='/*' element={<NotFound />} />
+         </Routes>
       </main>
    );
 };

@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 
 const NavMenu = ({ path, title, mobileMode, children }) => {
+   const closeMenu = e =>
+      e.target.closest(".nav-menu").classList.remove("nav-menu--open");
+
    return mobileMode ? (
       <section className='collapsible'>
          <header className='collapsible__header'>
@@ -14,14 +17,20 @@ const NavMenu = ({ path, title, mobileMode, children }) => {
                alt=''
             />
          </header>
-         <div className='collapsible__content'>{children}</div>
+         <div className='collapsible__content'>{children(() => null)}</div>
       </section>
    ) : (
-      <section className='nav-menu'>
+      <section
+         className='nav-menu'
+         onMouseEnter={openMenu}
+         onMouseLeave={closeMenu}
+      >
          <Link className='nav-menu__title' to={path}>
             {title}
          </Link>
-         <div className='nav-menu__content'>{children}</div>
+         <div className='nav-menu__content glassmorph'>
+            {children(closeMenu)}
+         </div>
       </section>
    );
 };
@@ -30,5 +39,8 @@ const toggler = e => {
    e.stopPropagation();
    e.target.closest(".collapsible").classList.toggle("collapsible--expanded");
 };
+
+const openMenu = e =>
+   e.target.closest(".nav-menu").classList.add("nav-menu--open");
 
 export default NavMenu;

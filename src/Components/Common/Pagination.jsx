@@ -3,7 +3,6 @@ import { range } from "lodash";
 
 const Pagination = ({ itemsCount, pageSize, currentPage, onPageChange }) => {
    const pagesCount = Math.ceil(itemsCount / pageSize);
-   if (pagesCount === 1) return null;
 
    const pages =
       pagesCount < 6
@@ -14,34 +13,51 @@ const Pagination = ({ itemsCount, pageSize, currentPage, onPageChange }) => {
          ? [1, null, pagesCount - 2, pagesCount - 1, pagesCount]
          : [1, null, currentPage, null, pagesCount];
 
+   const cN = "page__item shining";
+   const lastItem = currentPage * pageSize;
+
    return (
-      <ul className='card list pagination'>
-         <li
-            className='page__item'
-            onClick={() => currentPage - 1 && onPageChange(currentPage - 1)}
-         >
-            &lt;
-         </li>
-         {pages.map((page, i) => (
-            <li
-               key={i} // only i is suitable because pages.length is always below or equal to 5, but the page is unstable because of change of the page numbers.
-               className={
-                  page === currentPage ? "page__item active" : "page__item"
-               }
-               onClick={() => page && onPageChange(page)}
-            >
-               {page || "..."}
-            </li>
-         ))}
-         <li
-            className='page__item'
-            onClick={() =>
-               pagesCount - currentPage && onPageChange(currentPage + 1)
-            }
-         >
-            &gt;
-         </li>
-      </ul>
+      <div className='pagination'>
+         <span>
+            Showing {lastItem - pageSize + 1}-{Math.min(lastItem, itemsCount)}{" "}
+            of {itemsCount} Results:
+         </span>
+         {pagesCount > 1 && (
+            <ul className='list page__items'>
+               <li
+                  className={cN}
+                  onClick={() =>
+                     currentPage - 1 && onPageChange(currentPage - 1)
+                  }
+               >
+                  &lt;
+               </li>
+               {pages.map((page, i) => (
+                  <li
+                     key={i} // only i is suitable because pages.length is always below or equal to 5, but the page is unstable because of change of the page numbers.
+                     className={
+                        page
+                           ? page === currentPage
+                              ? cN + " active"
+                              : cN
+                           : "page__space"
+                     }
+                     onClick={() => page && onPageChange(page)}
+                  >
+                     {page || "..."}
+                  </li>
+               ))}
+               <li
+                  className={cN}
+                  onClick={() =>
+                     pagesCount - currentPage && onPageChange(currentPage + 1)
+                  }
+               >
+                  &gt;
+               </li>
+            </ul>
+         )}
+      </div>
    );
 };
 

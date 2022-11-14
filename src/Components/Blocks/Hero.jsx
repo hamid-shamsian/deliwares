@@ -8,19 +8,19 @@ const Hero = () => {
       { title: "Spring Collection", path: "/shop/collection/spring" }
    ];
 
-   const [banner, setBanner] = useState(0);
+   const [slide, setSlide] = useState(0);
    const [showHeading, setShowHeading] = useState(false);
    const [showStaticContent, setShowStaticContent] = useState(false);
    const timer = useRef(0);
 
-   const changeBanner = useCallback(e => {
+   const changeSlide = useCallback(e => {
       clearTimer();
-      const direction = e && e.target.id === "hero__prevBan" ? -1 : 1;
+      const direction = e && e.target.id === "hero__prevSlide" ? -1 : 1;
       setShowHeading(false);
       timer.current = setTimeout(() => {
          setShowHeading(true);
-         setBanner(b => (b + direction === -1 ? 2 : (b + direction) % 3));
-         timer.current = setTimeout(changeBanner, 5000); //if timeout changed:
+         setSlide(s => (s + direction === -1 ? 2 : (s + direction) % 3));
+         timer.current = setTimeout(changeSlide, 5000); //if timeout changed:
          //change hero__progress animation duration ^^^ accordingly.
       }, 500);
    }, []);
@@ -31,10 +31,10 @@ const Hero = () => {
       setShowHeading(true);
       timer.current = setTimeout(() => {
          setShowStaticContent(true);
-         timer.current = setTimeout(changeBanner, 4000); // =above timeout(5000)-below timeout(1000)
+         timer.current = setTimeout(changeSlide, 4000); // =above timeout(5000)-below timeout(1000)
       }, 1000);
       return clearTimer;
-   }, [changeBanner]);
+   }, [changeSlide]);
 
    return (
       <div className='hero'>
@@ -43,10 +43,10 @@ const Hero = () => {
                showHeading ? "right-in" : "left-out"
             }`}
          >
-            <h2 className='hero__heading'>{headings[banner].title}</h2>
+            <h2 className='hero__heading'>{headings[slide].title}</h2>
             <Link
-               to={headings[banner].path}
-               className='btn btn--primary hero__btn'
+               to={headings[slide].path}
+               className='btn hero__btn glassmorph'
             >
                Shop Now
             </Link>
@@ -54,32 +54,32 @@ const Hero = () => {
          <img
             src='./images/landing-4.jpg'
             alt=''
-            className={`hero__img ${banner || "full-opacity"}`}
+            className={`hero__img ${slide || "full-opacity"}`}
          />
          <img
             src='./images/landing-1.jpg'
             alt=''
-            className={`hero__img ${banner - 1 || "full-opacity"}`}
+            className={`hero__img ${slide - 1 || "full-opacity"}`}
          />
          <img
             src='./images/landing-5.jpg'
             alt=''
-            className={`hero__img ${banner - 2 || "full-opacity"}`}
+            className={`hero__img ${slide - 2 || "full-opacity"}`}
          />
          <span
-            className={`hero__chngBan hero__chngBan--prev ${
+            className={`hero__slide hero__slide--prev glassmorph ${
                showStaticContent || "move-left-out"
             }`}
-            onClick={changeBanner}
-            id='hero__prevBan'
+            onClick={changeSlide}
+            id='hero__prevSlide'
          >
             &lt;
          </span>
          <span
-            className={`hero__chngBan hero__chngBan--next ${
+            className={`hero__slide hero__slide--next glassmorph ${
                showStaticContent || "move-right-out"
             }`}
-            onClick={changeBanner}
+            onClick={changeSlide}
          >
             &gt;
          </span>
