@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
+import ProductCount from "../Common/ProductCount";
 import NotFound from "../Pages/NotFound";
 
 const ProductDetails = ({ data }) => {
@@ -79,6 +80,11 @@ const ProductDetails = ({ data }) => {
                      ${product.price}
                   </span>
                </div>
+               <ProductCount
+                  count={count}
+                  unitPrice={product.price}
+                  onCountChange={c => setCount(c)}
+               />
                <button className='btn shining prodetails__add-btn'>
                   Add to Cart
                </button>
