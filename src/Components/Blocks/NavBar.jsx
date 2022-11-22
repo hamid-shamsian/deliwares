@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import WindowContext from "../../Context/windowContext";
 import CatContext from "../../Context/catContext";
+import CartContext from "./../../Context/cartContext";
 import ListGroup from "../Common/ListGroup";
 import NavMenu from "../Common/NavMenu";
 
@@ -12,6 +13,8 @@ const NavBar = ({ logo }) => {
    const navigate = useNavigate();
 
    const { cats, selectedCat, handleCatSelect } = useContext(CatContext);
+
+   const { cart, setCart } = useContext(CartContext);
 
    const items = [
       {
@@ -33,11 +36,26 @@ const NavBar = ({ logo }) => {
       },
       { path: "/blog", content: "Blog" },
       { path: "/contact", content: "Contact" },
-      { path: "/about", content: "About Us" }
+      { path: "/about", content: "About Us" },
+      {
+         content: (
+            <NavMenu path={"/cart"} title={"Cart"} mobileMode={mobileMode}>
+               {() => (
+                  <ListGroup
+                     items={cart.length ? cart : [{ id: 0, name: "No Items." }]}
+                     selectedItem={null}
+                     onItemSelect={item => {
+                        setCart(cart.slice(0, -1));
+                     }}
+                  />
+               )}
+            </NavMenu>
+         )
+      }
    ];
 
    return mobileMode ? (
-      <nav className='nav'>
+      <nav className='nav nav--mobile'>
          <Link className='nav__logo' to='/' onClick={closeNav}>
             <img src={logo} alt='Logo' />
          </Link>
@@ -65,7 +83,7 @@ const NavBar = ({ logo }) => {
          </div>
       </nav>
    ) : (
-      <nav className='nav nav--inline'>
+      <nav className='nav nav--inline glassmorp'>
          <Link className='nav__logo' to='/'>
             <img src={logo} alt='Logo' />
          </Link>

@@ -1,7 +1,8 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useContext } from "react";
 import { useParams } from "react-router-dom";
 import ProductCount from "../Common/ProductCount";
 import NotFound from "../Pages/NotFound";
+import CartContext from "../../Context/cartContext";
 
 const ProductDetails = ({ data }) => {
    const { productId } = useParams();
@@ -24,6 +25,19 @@ const ProductDetails = ({ data }) => {
 
    const [count, setCount] = useState(1);
 
+   const { cart, setCart } = useContext(CartContext);
+   const addToCart = () => {
+      const p = {
+         id: product.id,
+         name: product.name.slice(0, 20),
+         price: product.price,
+         image: product.images[0].src,
+         attributes,
+         count
+      };
+      setCart([...cart, p]);
+   };
+
    if (!product) return <NotFound what='Product' />;
 
    return (
@@ -31,7 +45,11 @@ const ProductDetails = ({ data }) => {
          <h2 className='card shop__headings'>{product.name}</h2>
          <div className='grid grid--cols-2'>
             <section className='prodetails__images'>
-               <img className='prodetails__image' src={imgSrc} alt='Product' />
+               <img
+                  className='card prodetails__image'
+                  src={imgSrc}
+                  alt='Product'
+               />
                <div className='flex'>
                   {product.images.map((img, i) => (
                      <img
@@ -85,7 +103,10 @@ const ProductDetails = ({ data }) => {
                   unitPrice={product.price}
                   onCountChange={c => setCount(c)}
                />
-               <button className='btn shining prodetails__add-btn'>
+               <button
+                  className='btn shining prodetails__add-btn'
+                  onClick={addToCart}
+               >
                   Add to Cart
                </button>
             </section>
